@@ -48,6 +48,7 @@ var minimd = {
                 }
             }
             
+            
             if (lines[i].indexOf("#######") === 0) {
                 lines[i] = minimd.tagify("h7", lines[i].substring(7, lines[i].lenght));
             } else if (lines[i].indexOf("######") === 0) {
