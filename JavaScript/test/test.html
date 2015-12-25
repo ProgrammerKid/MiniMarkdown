@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+
+<html lang="en-US">
+<head>
+    <meta charset="UTF-8" />
+    <title>MiniMD Test</title>
+    <script src="minimd.js"></script>
+    <script>
+        function test() {
+            var mmd = document.getElementById("toParse").innerHTML,
+                htmlAlt = minimd.parse(mmd);
+            
+            document.getElementById("outputs").innerHTML = htmlAlt;
+        }
+    </script>
+</head>
+
+<body>
+    
+    
+<pre id="toParse">
+# Hello World
+## Sup Guys
+
+## Not my problem
+
+# Bye
+## Sub bye
+</pre>
+
+<button onclick="test()">Parse</button>
+
+<div id="outputs"></div>
+</body>
+</html>
