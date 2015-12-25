@@ -16,6 +16,17 @@ var minimd = {
         
         for (var i in lines) {
             
+            // If previous line defined new line, then apply it now
+            if (newLine) {
+                html = html + "<br>";
+                newLine = false;
+            }
+            // Check for line ending in two spaces (signifies a new line)
+            if (lines[i].substr(lines[i].length - 2, lines[i].length - 1) === "  ") {
+                newLine = true;
+            }
+            
+            
             // Bold italic marks
             while (lines[i].indexOf("***") >= 0) {
                 if (bolditalics_open) {
@@ -45,6 +56,7 @@ var minimd = {
                     italics_open = false;
                 } else {
                     lines[i] = lines[i].replace("*", "<i>");
+                    italics_open = true;
                 }
             }
             
