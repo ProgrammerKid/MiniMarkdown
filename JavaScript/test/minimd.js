@@ -26,6 +26,25 @@ var minimd = {
                 newLine = true;
             }
             
+            // Attatchments
+            if (lines[i].indexOf("*|*") >= 0) {
+                var segments = lines[i].split(" *|* "),
+                    type = segments[0].toLowerCase(),
+                    uri = segments[1],
+                    alt;
+                
+                if (segments.length == 3) {
+                    alt = segments[2];
+                }
+                
+                if (type == "link" || type == "a") { // Link/anchor
+                    lines[i] = "<a href='" + uri + "'>" + alt + "</a>";
+                } else if (type == "image" || type == "img") { // Image
+                    lines[i] = "<img src='" + uri + "' alt='" + alt + "' />";
+                } else if (type == "iframe" || type == "webpage" || type == "website") {
+                    lines[i] = "<iframe src='" + uri + ">" + alt + "<iframe>";
+                }
+            }
             
             // Bold italic marks
             while (lines[i].indexOf("***") >= 0) {
