@@ -28,7 +28,7 @@ You can add an empty line between two lines of text by simply hitting `Enter` or
 Example:
 
     Hello
-    
+     
     World
 
 will render:
@@ -88,14 +88,17 @@ attatchment. In MMD, you can attatch:
 * IFrames (websites/webpages/pdfs/mp3/etc)
 
 Syntax:
+
     <type> *|* <uri> *|* <optional alt text>
     
 Examples:
+
     image *|* http://google.com/example.png *|* Enable image rendering in your browser
     link *|* http://google.com/ *|* Click here to go to Google
     iframe *|* http://cnn.com/ *|* Enable iFraming to check out the worlds greatest news
 
 HTML versions:
+
     <img src="http://google.com/example.png" alt="Enable image rendering in your browser"/>
     <a href="http://google.com/">Click here to go to Google</a>
     <iframe src="http://cnn.com/">Enable iFraming to check out the worlds greatest news</iframe>
