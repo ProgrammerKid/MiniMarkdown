@@ -12,7 +12,8 @@ var minimd = {
         var bold_open = false,
             italics_open = false,
             bolditalics_open = false,
-            underline_open = false;
+            underline_open = false,
+            codeblock_open = false;
         
         for (var i in lines) {
             
@@ -21,9 +22,27 @@ var minimd = {
                 html = html + "<br>";
                 newLine = false;
             }
+            // If previous line was blank, then two new lines are needed
+            if (lines[i] === "") {
+                html = html + "<br><br>";
+                continue;
+            }
             // Check for line ending in two spaces (signifies a new line)
             if (lines[i].substr(lines[i].length - 2, lines[i].length - 1) === "  ") {
                 newLine = true;
+            }
+            
+            // Check if a code block should be closed
+            if (codeblock_open) {
+                if (lines[i].indexOf("    ") !== 0 || lines[i].indexOf("\t") !== 0) {
+                    codeblock_open = false;
+                    html = html + "</pre>";
+                }
+            } else {
+                if (lines[i].indexOf("    ") === 0 || lines[i].indexOf("\t") === 0) {
+                    codeblock_open = true;
+                    html = html + "<pre class='code-block' style='box-sizing:border-box; padding:10px; background:silver; font-family:monospace;'>";
+                }
             }
             
             // Attatchments
