@@ -13,7 +13,8 @@ var minimd = {
             italics_open = false,
             bolditalics_open = false,
             underline_open = false,
-            codeblock_open = false;
+            codeblock_open = false,
+            quote_open = false;
         
         for (var i in lines) {
             
@@ -32,7 +33,7 @@ var minimd = {
                 newLine = true;
             }
             
-            // Check if a code block should be closed
+            // Check if a code block should be closed or opened
             if (codeblock_open) {
                 if (lines[i].indexOf("    ") !== 0 || lines[i].indexOf("\t") !== 0) {
                     codeblock_open = false;
@@ -42,6 +43,19 @@ var minimd = {
                 if (lines[i].indexOf("    ") === 0 || lines[i].indexOf("\t") === 0) {
                     codeblock_open = true;
                     html = html + "<pre class='code-block' style='box-sizing:border-box; padding:10px; background:silver; font-family:monospace;'>";
+                }
+            }
+            
+            // Check if a blocked quote should be closed or opened
+            if (quote_open) {
+                if (lines[i].indexOf("|") !== 0) {
+                    html = html + "</div>";
+                    quote_open = false;
+                }
+            } else if (!quote_open) {
+                if (lines[i].indexOf("|") === 0) {
+                    html = html + "<div class='block-quote' style='background:lightorange; border-left:3px solid orange; padding:10px;'>";
+                    quotes_open = true;
                 }
             }
             
